@@ -44,6 +44,12 @@ const YoutubeForm = () => {
 							required: {
 								value: true,
 								message: "email is required"
+							},
+							validate: (fieldValue) => {
+								return (
+									fieldValue !== "admin@gmail.com" ||
+									"Enter a different email"
+								);
 							}
 						})}
 					/>
