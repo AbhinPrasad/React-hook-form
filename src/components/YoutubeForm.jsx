@@ -3,7 +3,15 @@ import { useForm } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 
 const YoutubeForm = () => {
-	const form = useForm();
+	const form = useForm({
+		defaultValues: async () => {
+			const response = await fetch(
+				"https://jsonplaceholder.typicode.com/users/3"
+			);
+			const data = await response.json();
+			return { username: "Batman", email: data.email, channel: "" };
+		}
+	});
 
 	const { register, control, handleSubmit, formState } = form;
 
@@ -45,11 +53,19 @@ const YoutubeForm = () => {
 								value: true,
 								message: "email is required"
 							},
-							validate: (fieldValue) => {
-								return (
-									fieldValue !== "admin@gmail.com" ||
-									"Enter a different email"
-								);
+							validate: {
+								notAdmin: (fieldValue) => {
+									return (
+										fieldValue !== "admin@gmail.com" ||
+										"Enter a different email"
+									);
+								},
+								notBlackListed: (fieldValue) => {
+									return (
+										!fieldValue.endsWith("baddomain.com") ||
+										"this domain is not supported"
+									);
+								}
 							}
 						})}
 					/>
