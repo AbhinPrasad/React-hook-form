@@ -11,7 +11,8 @@ const YoutubeForm = () => {
 			social: {
 				twitter: "",
 				facebook: ""
-			}
+			},
+			phone:["",""]
 		}
 	});
 
@@ -92,7 +93,7 @@ const YoutubeForm = () => {
 						type="text"
 						id="twitter"
 						placeholder="twitter"
-						{...register("social.twitter", {})}
+						{...register("social.twitter")}
 					/>
 				</div>
 				<div className="form-control">
@@ -100,7 +101,23 @@ const YoutubeForm = () => {
 						type="text"
 						id="facebook"
 						placeholder="facebook"
-						{...register("social.facebook", {})}
+						{...register("social.facebook")}
+					/>
+				</div>
+				<div className="form-control">
+					<input
+						type="text"
+						id="primary-phone"
+						placeholder="primary ph"
+						{...register("phone.0")}
+					/>
+				</div>
+				<div className="form-control">
+					<input
+						type="text"
+						id="secondory-phone"
+						placeholder="secondory-ph"
+						{...register("phone.1")}
 					/>
 				</div>
 				<button>Submit</button>
